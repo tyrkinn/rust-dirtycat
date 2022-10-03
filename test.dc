@@ -1,0 +1,12 @@
+push 5;
+inc; inc;
+sqr;
+push 7;
+add;
+push 10;
+sub;
+out;
+push 20;
+add;
+sqr;
+dump;
