@@ -3,10 +3,14 @@ use std::{env::args, fs::File};
 
 #[derive(Debug)]
 enum Token {
-    NUMBER(i32), INCREMENT,
-    DECREMENT, SQUARE,
-    PLUS, MINUS,
-    PUSH, DUMP,
+    NUMBER(i32),
+    INCREMENT,
+    DECREMENT,
+    SQUARE,
+    PLUS,
+    MINUS,
+    PUSH,
+    DUMP,
     OUT,
 }
 
@@ -70,7 +74,7 @@ fn parse_instruction(instruction: &str, state: &mut Vec<i32>) {
                 let on_stack = state.last();
                 println!("{}", on_stack.expect("Stack underflow"));
             }
-            x =>  {
+            x => {
                 panic!("Unexpected syntax at token {:?}", x);
             }
         }
@@ -85,7 +89,6 @@ fn parse_instruction(instruction: &str, state: &mut Vec<i32>) {
             }
         }
     }
-
 }
 
 fn main() {
@@ -106,7 +109,8 @@ fn main() {
     let mut file = File::open(file_path).expect("Can't open file with given path");
     let mut contents = String::new();
 
-    file.read_to_string(&mut contents).expect("Can't read file contents");
+    file.read_to_string(&mut contents)
+        .expect("Can't read file contents");
 
     contents = contents.replace("\n", "");
 
@@ -114,8 +118,8 @@ fn main() {
     let mut instructions: Vec<&str> = contents.split(";").collect();
     instructions.pop();
     for inst in instructions {
-       parse_instruction(inst, &mut state);
+        parse_instruction(inst, &mut state);
     }
-    
+
     return ();
 }
